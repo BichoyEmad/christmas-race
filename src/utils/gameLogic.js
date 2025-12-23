@@ -1,5 +1,5 @@
 export const GAME_CONSTANTS = {
-    TOTAL_STEPS: 5, // Number of steps to reach the finish line
+    TOTAL_STEPS: 10, // Number of steps to reach the finish line
     TEAMS: {
         TEAM_A: 'teamA',
         TEAM_B: 'teamB',
