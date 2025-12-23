@@ -1,0 +1,129 @@
+/* RefinedTrackStyles.css */
+
+.track-road {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    /* Snow Road: White to light blue gradient */
+    background: linear-gradient(to bottom, #f0f8ff 0%, #e6f7ff 50%, #d4efff 100%);
+    border-radius: 8px;
+    /* Softer, bluer shadows for ice/snow feel */
+    box-shadow:
+        0 4px 10px rgba(135, 206, 235, 0.4),
+        inset 0 2px 10px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 5px rgba(176, 224, 230, 0.5);
+    /* overflow: hidden;  <-- REMOVED to allow car to overhang if needed, but actually we want the trail to be clipped. 
+     We will handle car clipping by putting the car in a wrapper outside/above this. 
+     For now, keep overflow hidden here for the road surface elements (trail, markers). */
+    overflow: hidden;
+    /* Icy border at bottom instead of asphalt thickness */
+    border-bottom: 4px solid #b0e0e6;
+}
+
+/* Texture effect for snow/ice */
+.track-road::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Snow banks on edges */
+.track-road::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: white;
+    filter: blur(4px);
+    z-index: 2;
+    opacity: 0.8;
+    box-shadow: 0 110px 10px white;
+    /* Fake bottom border snow too */
+}
+
+/* Lane markers - Darker Cyan/Teal to stand out against snow */
+.road-marking {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(90deg,
+            transparent,
+            transparent 20px,
+            rgba(70, 130, 180, 0.4) 20px,
+            /* SteelBlue with opacity */
+            rgba(70, 130, 180, 0.4) 40px);
+    z-index: 2;
+}
+
+/* Finish Line - Checkerboard */
+.finish-line {
+    position: absolute;
+    left: 93%;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    transform: translateX(-50%);
+    background-color: #f0f8ff;
+    background-image:
+        linear-gradient(45deg, #4682b4 25%, transparent 25%, transparent 75%, #4682b4 75%, #4682b4),
+        linear-gradient(45deg, #4682b4 25%, transparent 25%, transparent 75%, #4682b4 75%, #4682b4);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    z-index: 3;
+    opacity: 0.9;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.finish-banner {
+    position: absolute;
+    right: -10px;
+    top: -50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.finish-pole {
+    width: 4px;
+    height: 60px;
+    background: repeating-linear-gradient(45deg,
+            #ff0000,
+            #ff0000 10px,
+            #ffffff 10px,
+            #ffffff 20px);
+    border-radius: 2px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.finish-flag {
+    font-size: 2rem;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Progress Trail */
+.progress-trail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 4px;
+    z-index: 1;
+    /* Below markers (2) */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: width 1s ease-out;
+    /* Smooth fill */
+}
