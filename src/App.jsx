@@ -6,6 +6,7 @@ import SetupScreen from './components/SetupScreen';
 import RaceTrack2D from './components/RaceTrack2D';
 import QuestionModal from './components/QuestionModal';
 import SnowEffect from './components/SnowEffect';
+import FullScreenToggle from './components/FullScreenToggle';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function App() {
@@ -168,6 +169,7 @@ function App() {
   return (
     <div className="app-container" style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}>
       <SnowEffect />
+      <FullScreenToggle />
 
       {/* Helper UI Layer for Turn Info & Manual Trigger */}
       {gameState === 'racing' && (
